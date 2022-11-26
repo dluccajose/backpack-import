@@ -6,3 +6,12 @@ a production enviroment.
 - Import records into your DB from an excel file
 - Validations
 - UI for file upload
+
+# Preview
+Coming soon...
+
+# How to use it
+Coming soon...
+
+# Documentation 
+Coming soon...
