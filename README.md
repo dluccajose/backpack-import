@@ -22,3 +22,17 @@ Coming soon...
 - Views
 - Hooks
 - Advance options
+
+## Configuration
+To start, you have to use the operation in your backpack crud by adding the trait
+`use \Dlucca\BackpackImport\ImportOperation;`.Then you should create a function `protected function setupImportOperation()`. Inside this function you will have access to the importer object via $this->backpackImport 
+
+## Insert records
+To import records into to your database yo have to tell importer wich columns from the excel correspond to your table fields, you can do it usign the  method `$this->backpackImport->setImportColumnMapping()`, this method accepts and associative array where the keys is the of your field in the table and the value is the name in your column excel. For example, lets assume we have a excel file in wich the columns headers are "Name" and "Age", and the fields in our people table are "first_name" and "person_age"
+
+```
+$this->backpackImport->setImportColumnMapping([
+  'first_name' => 'Name',
+  'person_age' => 'Age',
+]);
+```
