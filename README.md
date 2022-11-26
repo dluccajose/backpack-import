@@ -14,4 +14,10 @@ Coming soon...
 Coming soon...
 
 # Documentation 
-Coming soon...
+- Configuration
+- Insert records
+- Update records
+- Relationships
+- Views
+- Hooks
+- Advance options
