@@ -1,0 +1,18 @@
+{
+    "name": "dlucca/backpack-import",
+    "description": "Import operation for Backpack Admin Panel",
+    "autoload": {
+        "psr-4": {
+            "Dlucca\\BackpackImport\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dlucca\\BackpackImport\\BackpackImportServiceProvider"
+            ]
+        }
+    }
+}
