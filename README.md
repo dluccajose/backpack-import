@@ -4,3 +4,5 @@ a production enviroment.
 
 # Features
 - Import records into your DB from an excel file
+- Validations
+- UI for file upload
