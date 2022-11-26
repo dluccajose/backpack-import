@@ -1,4 +1,4 @@
-# backpack-import
+# dlucca/backpack-import
 backpack-import is a Laravel package and addon for Backpack package. Allows you to add a "import operation" to your CRUDs to easily import records from an excel file into to your database.. This is a personal project and still under development, its not recomended to use it in
 a production enviroment. If you want to play with it, you can install this package as a local composer package, as still is not available via composer install.
 
@@ -34,5 +34,27 @@ To import records into to your database yo have to tell importer wich columns fr
 $this->backpackImport->setImportColumnMapping([
   'first_name' => 'Name',
   'person_age' => 'Age',
+]);
+```
+
+## Update Records
+Coming soon...
+
+## Validations
+When performing the upload and import of the excel file, you can set validations just that you would do in your typical create/update CRUD. 
+
+Set validations rule
+
+```
+$this->backpackImport->setImportValidationRules([
+    'name' => ['required'],
+]);
+```
+
+Set validation attributes names
+
+```
+$this->backpackImport->setImportValidationAttributes([
+    'name' => 'Nombre',
 ]);
 ```
