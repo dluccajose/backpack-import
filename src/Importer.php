@@ -2,7 +2,6 @@
 
 namespace Dlucca\BackpackImport;
 
-use App\Models\City;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
