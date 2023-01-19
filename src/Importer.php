@@ -130,6 +130,7 @@ class Importer
                 $this->validationAttributesToArraySyntax()
             );
 
+            // who handles the validation exception?
             $validator->validate();
         }
 
@@ -159,7 +160,7 @@ class Importer
                 }
             }
         } catch (Exception $e) {
-            // If somethings fails, we rollback all the DB changes and throw an exception
+            // If somethings fails, we rollback all the DB changes and throw the exception
             DB::rollBack();
             throw $e;
         }
@@ -187,10 +188,12 @@ class Importer
 
         $operation = $entry->getKey() ? 'update' : 'create';
 
+        // Props that should change before save
         $colsBeforeSave = collect($row)->filter(function ($value, $col) {
             return !($this->importColumnMapping[$col]['set_after_save'] ?? false);
         });
 
+        // Props that should change after save
         $colsAfterSave = collect($row)->filter(function ($value, $col) {
             return ($this->importColumnMapping[$col]['set_after_save'] ?? false);
         });
@@ -348,7 +351,7 @@ class Importer
 
                     if (is_array(__("validation.$ruleName"))) {
                         // TODO: para las validaciones que contienen arrays (aplican diferente
-                        // dependiendo del tipo de validacion anterior)
+                        // dependiendo del tipo de validación anterior)
                         $message = collect(__("validation.$ruleName"))->first();
                     } else {
                         $message = __("validation.$ruleName");
@@ -363,6 +366,8 @@ class Importer
     }
     
     /**
+     * Loop through the row data and set it to the entry model
+     * 
      * @todo permitir al desarrollador omitir columnas al actualizar un modelo
      *
      * @param $entry
