@@ -75,7 +75,16 @@ class Importer
         $this->updateField = $name;
     }
 
-    public function setImportColumnMapping($array): void
+    /**
+     * Set the relation betweens the columns in the excel file and the fields on the DB. Accepts
+     * as array as parameters, the key of the array is the name of the field in the table, and
+     * the value is the name of the column in the excel file.
+     *
+     *
+     * @param array $array
+     * @return void
+     */
+    public function setImportColumnMapping(array $array): void
     {
         $this->importColumnMapping = $array;
     }
@@ -130,7 +139,7 @@ class Importer
                 $this->validationAttributesToArraySyntax()
             );
 
-            // who handles the validation exception?
+            // @todo specify who handles the validation exception?
             $validator->validate();
         }
 
@@ -377,6 +386,12 @@ class Importer
     private function setRowDataToEntryModel($entry, $row, string $operation)
     {
         foreach ($row as $column => $value) {
+            $itsFake = $this->importColumnMapping[$column]['fake'] ?? false;
+
+            if ($itsFake) {
+                continue;
+            }
+
             $customImportLogic = $this->importColumnMapping[$column]['import_logic'] ?? false;
             
             if ($customImportLogic) {
