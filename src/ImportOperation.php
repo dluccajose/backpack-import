@@ -15,9 +15,10 @@ trait ImportOperation
     {
         Route::get($segment.'/import', [
             'as'        => $routeName.'.getImport',
-            'uses'      => $controller.'@getImportForm',
+            'uses'      => $controller.'@showImportForm',
             'operation' => 'import',
         ]);
+
         Route::post($segment.'/import', [
             'as'        => $routeName.'.postImport',
             'uses'      => $controller.'@postImportFile',
@@ -31,20 +32,16 @@ trait ImportOperation
 
         $this->crud->allowAccess('import');
 
-        $this->crud->macro('setImportView', function($viewPath) {
-            $this->set('import.view', $viewPath);
-        });
-
-        $this->crud->macro('setExampleFileUrl', function($fileUrl) {
-            $this->set('import.example_file_url', $fileUrl);
-        });
-
-        $this->crud->macro('setButtonView', function($viewPath) {
-            $this->set('import.button_view', $viewPath);
-        });
+        $this->setupExtraCrudMethods();
 
         $this->crud->operation('list', function() {
-            $this->crud->addButton('top', 'import', 'view', 'backpack-import::import', 'end');
+            $this->crud->addButton(
+                'top', 
+                'import', 
+                'view', 
+                $this->crud->get('import.button_view') ?? 'backpack-import::import', 
+                'end'
+            );
         });
 
        if (method_exists(self::class, 'setupImportOperation')) {
@@ -52,7 +49,7 @@ trait ImportOperation
        }
     }
 
-    public function getImportForm()
+    public function showImportForm()
     {
         $this->crud->hasAccessOrFail('import');
 
@@ -77,5 +74,20 @@ trait ImportOperation
         Alert::success('Importación realizada.')->flash();
 
         return Redirect::to($this->crud->route);
+    }
+
+    protected function setupExtraCrudMethods(): void
+    {
+        $this->crud->macro('setImportView', function($viewPath) {
+            $this->set('import.view', $viewPath);
+        });
+
+        $this->crud->macro('setExampleFileUrl', function($fileUrl) {
+            $this->set('import.example_file_url', $fileUrl);
+        });
+
+        $this->crud->macro('setButtonView', function($viewPath) {
+            $this->set('import.button_view', $viewPath);
+        });
     }
 }
