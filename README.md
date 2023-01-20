@@ -1,6 +1,6 @@
 # dlucca/backpack-import
-`dlucca/backpack-import` is a Laravel package and a Backpack Laravel addon. Allows you to add a "import operation" to your CRUDs to easily import records from an excel file into to your database. This is a personal project and still under development, its not recomended to use it in
-a production enviroment. If you want to play with it, you can install this package as a local composer package, as still is not available via composer install.
+`dlucca/backpack-import` is a Laravel package and a Backpack Laravel addon. Allows you to add a "import operation" to your CRUDs to easily import records from an excel file into to your database. This is a personal project and still under development, its not recommended to use it in
+a production environment. If you want to play with it, you can install this package as a local composer package, as still is not available via composer install.
 
 # Features
 - Import records into your DB from an excel file
