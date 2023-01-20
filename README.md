@@ -69,6 +69,26 @@ $this->backpackImport->setImportColumnMapping([
 ]);
 ```
 
+## Advanced options
+For more complicate operations, you can provide additional options:
+
+```
+$this->backpackImport->setImportColumnMapping([
+    'complex_field' => [
+        'name' => 'Nombre'                  // Name of the column in the excel file
+        'set_after_save' => true            // If true, the import logic will be execute after the model
+                                            // was saved
+        'import logic' => function () {     // Provide a custom logic for the import
+
+        },
+        'fake' => true                      // If true, makes the column data available int the row
+                                            // variable, but it wont execute any import logic or be assign
+                                            // to any property on the model. It is usefully when you need to
+                                            // use that data in other field
+    ]
+]);
+```
+
 ## Update Records
 Coming soon...
 
