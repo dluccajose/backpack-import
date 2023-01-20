@@ -56,7 +56,7 @@
             <form action="/{{ $crud->route }}/import" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-12 mb-3">
-                    <input type="file" name="import_file" class="form-control">
+                    <input type="file" name="import_file" class="form-control" required>
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-block btn-primary">
