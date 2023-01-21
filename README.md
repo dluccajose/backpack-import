@@ -117,3 +117,13 @@ $this->backpackImport->setImportValidationAttributes([
     'name' => 'Nombre',
 ]);
 ```
+
+## Hooks
+Hooks are functions that you can attach to execute in different moments of the import operation. List of available hooks
+
+```
+$this->backpackImport->doHook('before_import', function ($mappedRows) {});
+$this->backpackImport->doHook('before_insert', function ($entry, $row) {});
+$this->backpackImport->doHook('after_insert', function ($entry, $row) {});
+$this->backpackImport->doHook('after_import', function () {});
+```
