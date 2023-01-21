@@ -9,5 +9,7 @@ class BackpackImportServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'backpack-import');
+
+        $this->loadTranslationsFrom(__DIR__.'/lang', 'backpack-import');
     }
 }
