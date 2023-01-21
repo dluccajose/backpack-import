@@ -39,7 +39,7 @@ trait ImportOperation
                 'top', 
                 'import', 
                 'view', 
-                $this->crud->get('import.button_view') ?? 'backpack-import::import', 
+                $this->crud->get('import.button_view') ?? 'backpack-import::import_button', 
                 'end'
             );
         });
@@ -65,13 +65,17 @@ trait ImportOperation
 
     public function postImportFile(Request $request)
     {
+        $request->validate([
+            'import_file' => ['required', 'mimes:xlsx,ods,xls,csv'],
+        ]);
+
         $importFile = $request->file('import_file');
 
         $this->backpackImport->setModel($this->crud->getModel());
 
         $this->backpackImport->import($importFile);
 
-        Alert::success('Importación realizada.')->flash();
+        Alert::success(__('backpack-import::messages.import_successfully'))->flash();
 
         return Redirect::to($this->crud->route);
     }
