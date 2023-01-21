@@ -124,6 +124,7 @@ class Importer
     {
         $excelImporter = new ExcelImport($this->getHeadingRow());
 
+        // Convert excel data to collection
         $rows = Excel::toCollection($excelImporter, $importFile)[$this->getExcelPageNumber()];
 
         $mappedRows = $this->getMappedData($rows);
@@ -131,15 +132,17 @@ class Importer
         // Validate data if validation rules are provided
         if ($this->importValidationRules) {
             $arrayRules = $this->getValidationRules();
+            $validationRules = $this->formatValidationMessages(count($mappedRows));
+            $validationAttributes = $this->validationAttributesToArraySyntax();
 
             $validator = Validator::make(
                 $mappedRows,
                 $arrayRules,
-                $this->formatValidationMessages(count($mappedRows)),
-                $this->validationAttributesToArraySyntax()
+                $validationRules,
+                $validationAttributes
             );
 
-            // @todo specify who handles the validation exception?
+            // Validation Exception will be handle by Laravel
             $validator->validate();
         }
 
