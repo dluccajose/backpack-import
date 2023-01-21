@@ -8,6 +8,9 @@ a production environment. If you want to play with it, you can install this pack
 - Customize import logic
 - UI for file upload
 
+# Future features
+- Table with a preview of the data to be imported
+
 # Preview
 Coming soon...
 
@@ -60,7 +63,7 @@ To start, you have to use the operation in your backpack crud by adding the trai
 `use \Dlucca\BackpackImport\ImportOperation;`.Then you should create a function `protected function setupImportOperation()`. Inside this function you will have access to the Importer object via `$this->backpackImport`.
 
 ## Insert records
-To import records into to your database yo have to tell importer wich columns from the excel correspond to your table fields, you can do it usign the  method `$this->backpackImport->setImportColumnMapping()`, this method accepts and associative array where the keys is the of your field in the table and the value is the name in your column excel. For example, lets assume we have a excel file in wich the columns headers are "Name" and "Age", and the fields in our people table are "first_name" and "person_age"
+To import records into to your database yo have to tell importer which columns from the excel correspond to your table fields, you can do it using the  method `$this->backpackImport->setImportColumnMapping()`, this method accepts and associative array where the keys is the name of your field in the table and the value is the name in your excel column header. For example, lets assume we have a excel file in which the header columns are "Name" and "Age", and the fields in our people table are "first_name" and "person_age"
 
 ```
 $this->backpackImport->setImportColumnMapping([
@@ -70,7 +73,7 @@ $this->backpackImport->setImportColumnMapping([
 ```
 
 #### Advanced options
-For more complex operations, you can provide additional options to a field:
+For more complex operations, you can provide additional options to the array:
 
 ```
 $this->backpackImport->setImportColumnMapping([
@@ -90,7 +93,11 @@ $this->backpackImport->setImportColumnMapping([
 ```
 
 ## Update Records
-Coming soon...
+For default, every time you do a import, the package will try to insert the records in the database, even if already exists. If you want to update the records that already exist, you can set an "update field". The package will do a search by the field provided, and will update the record if there any result. 
+
+```
+$this->backpackImport->setUpdateField('code');
+```
 
 ## Validations
 When performing the upload and import of the excel file, you can set validations just that you would do in your typical create/update CRUD. 
