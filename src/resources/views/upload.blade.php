@@ -14,7 +14,7 @@
 @section('header')
   <div class="container-fluid">
     <h2>
-      <span class="">Importar {!! $crud->getHeading() ?? $crud->entity_name_plural !!}</span>
+      <span class="">@lang('backpack-import::messages.import') {!! $crud->getHeading() ?? $crud->entity_name_plural !!}</span>
       <small id="datatable_info_stack">{!! $crud->getSubheading() ?? '' !!}</small>
     </h2>
   </div>
@@ -60,14 +60,14 @@
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-block btn-primary">
-                        Importar archivo
+                      @lang('backpack-import::messages.import_file')
                     </button>
                 </div>
     
                 <div class="col-md-12 mt-3">
                     <p>
                         <a href="{{ asset($import_template_url) }}">
-                            Descargar plantilla
+                            @lang('backpack-import::messages.download_template')
                         </a>
                     </p>
                 </div>
