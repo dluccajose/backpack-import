@@ -59,6 +59,12 @@ class CityCrudController extends CrudController
 - Advance options
 
 ## Setup
+Install with composer
+
+```sh
+    composer require dlucca/backpack-import:dev-master
+```
+
 To start, you have to use the operation in your backpack crud by adding the trait
 `use \Dlucca\BackpackImport\ImportOperation;`.Then you should create a function `protected function setupImportOperation()`. Inside this function you will have access to the Importer object via `$this->backpackImport`.
 
@@ -116,6 +122,7 @@ Set validation attributes names
 $this->backpackImport->setImportValidationAttributes([
     'name' => 'Nombre',
 ]);
+
 ```
 
 ## Hooks
@@ -126,4 +133,19 @@ $this->backpackImport->doHook('before_import', function ($mappedRows) {});
 $this->backpackImport->doHook('before_insert', function ($entry, $row) {});
 $this->backpackImport->doHook('after_insert', function ($entry, $row) {});
 $this->backpackImport->doHook('after_import', function () {});
+```
+
+## Set template example for download
+Into `setupImportOperation()` add:
+```php
+
+    protected function setupImportOperation()
+    {
+        ...
+
+        $this->crud->set('import.example_file_url', Storage::url('file.xlsx'));
+
+        ...
+
+    }
 ```
